@@ -2,10 +2,10 @@ import 'dotenv/config';
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-import indexRoutes from './routes/index';
-import historyRoutes from './routes/history';
-import newGameRoutes from './routes/new-game';
-import gameRoutes from './routes/game';  
+import indexRoutes from './routes/index.js';
+import historyRoutes from './routes/history.js';
+import newGameRoutes from './routes/new-game.js';
+import gameRoutes from './routes/game.js';  
 
 const app = express();
 

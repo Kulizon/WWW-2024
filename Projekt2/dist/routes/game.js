@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import Game from '../models/Game';
+import Game from '../models/Game.js';
 const router = Router();
 // @ts-ignore
 router.get('/:id', async (req, res) => {

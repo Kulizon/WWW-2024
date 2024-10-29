@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import Game from '../models/Game';
+import Game from '../models/Game.js';
 const router = Router();
 router.get('/', (req, res) => {
     res.render('new-game');
