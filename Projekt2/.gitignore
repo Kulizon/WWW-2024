@@ -1,0 +1,35 @@
+# Node modules for Projekt2
+Projekt2/node_modules/
+
+# Environment variables for Projekt2
+Projekt2/.env
+
+# Logs for Projekt2
+Projekt2/logs/
+Projekt2/*.log
+Projekt2/npm-debug.log*
+Projekt2/yarn-debug.log*
+Projekt2/yarn-error.log*
+
+# Dependency directories
+Projekt2/jspm_packages/
+Projekt2/.npm/
+
+# TypeScript build artifacts for Projekt2
+Projekt2/dist/
+Projekt2/build/
+Projekt2/out/
+
+# TSConfig files for Projekt2
+Projekt2/.tsbuildinfo
+
+# IDE and editor settings
+Projekt2/.vscode/
+Projekt2/.idea/
+
+# MacOS and Windows system files
+.DS_Store
+Thumbs.db
+
+# Other for Projekt2
+Projekt2/pomysl.txt

@@ -1,0 +1,113 @@
+ 
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: auto 200px;
+}
+
+@media only screen and (max-width: 800px) {
+    body {
+        grid-template-columns: auto;
+    }
+
+    aside {
+        display: none;
+    }
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+}
+
+section > img {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 16px;
+}
+
+header {
+    background: #4CAF50;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    grid-column: span 2;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    width: 100%;
+    grid-column: span 2;
+}
+
+aside {
+    background-color: #f9f9f9;
+    border-left: 4px solid #4CAF50;
+    padding: 15px;
+    margin: 20px 0;
+    font-size: 0.9em;
+    color: #333;
+}
+
+aside h3 {
+    font-size: 1.2em;
+    color: #4CAF50;
+    margin-top: 0;
+}
+
+aside p {
+    margin: 10px 0;
+    line-height: 1.4;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1em;
+    text-align: left;
+}
+
+table thead {
+    background-color: #4CAF50;
+    color: white;
+}
+
+table th,
+table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tbody tr:hover {
+    background-color: #e0e0e0;
+}

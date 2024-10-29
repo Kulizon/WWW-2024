@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Czółko - Nowa Gra</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <form id="game-form" action="/new-game" method="POST" onsubmit="return validateForm()">
+        <div id="players-container">
+            <div class="player">
+                <div class="input-group">
+                    <label for="player-name-0">Player Name</label>
+                    <input type="text" id="player-name-0" name="players[0][name]" placeholder="Player Name">
+                </div>
+                <div class="input-group">
+                    <label for="player-password-0">Password</label>
+                    <input type="text" id="player-password-0" name="players[0][password]" placeholder="Password">
+                </div>
+            </div>
+        </div>
+        <div id="error-message" class="error-message"></div>
+        <button type="button" onclick="addPlayer()">Add Player</button>
+        <button type="submit">Start Game</button>
+    </form>
+
+    <script>
+        let playerCount = 1;
+
+        function addPlayer() {
+            const container = document.getElementById('players-container');
+            const playerDiv = document.createElement('div');
+            playerDiv.classList.add('player');
+            playerDiv.innerHTML = `
+                <div class="input-group">
+                    <label for="player-name-${playerCount}">Player Name</label>
+                    <input type="text" id="player-name-${playerCount}" name="players[${playerCount}][name]" placeholder="Player Name">
+                </div>
+                <div class="input-group">
+                    <label for="player-password-${playerCount}">Password</label>
+                    <input type="text" id="player-password-${playerCount}" name="players[${playerCount}][password]" placeholder="Password">
+                </div>
+            `;
+            container.appendChild(playerDiv);
+            playerCount++;
+        }
+
+        function validateForm() {
+            const playerDivs = document.querySelectorAll('.player');
+            let isValid = true;
+            const errorMessageDiv = document.getElementById('error-message');
+            errorMessageDiv.innerHTML = ''; 
+
+            if (playerDivs.length < 3) {
+                errorMessageDiv.innerHTML += 'Please add at least 3 players. <br>';
+                isValid = false;
+            }
+
+            for (let i = 0; i < playerDivs.length; i++) {
+                const nameInput = playerDivs[i].querySelector(`input[name="players[${i}][name]"]`);
+                const passwordInput = playerDivs[i].querySelector(`input[name="players[${i}][password]"]`);
+
+                if (nameInput.value.trim().length < 3) {
+                    errorMessageDiv.innerHTML += 'Player names must be at least 3 characters long. <br>';
+                    isValid = false;
+                }
+                if (passwordInput.value.trim().length < 3) {
+                    errorMessageDiv.innerHTML += 'Passwords must be at least 3 characters long. <br>';
+                    isValid = false;
+                }
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>

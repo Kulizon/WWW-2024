@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gra - <%= game._id %></title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f5;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        .passwords {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .passwords li {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Gra ID: <%= game._id %></h1>
+    <h2>Uczestnicy:</h2>
+    <ul id="player-list">
+        <% game.players.forEach((player, index) => { %>
+            <li>
+                <button type="button" onclick="togglePasswords(<%= index %>, <%= JSON.stringify(game.players) %>)">
+                    <strong><%= player.name %></strong>
+                </button>
+            </li>
+        <% }) %>
+    </ul>
+    <ul class="passwords" id="passwords-ul"></ul>
+
+    <script>
+        function togglePasswords(index, players) {
+            const passwordsUl = document.getElementById('passwords-ul');
+            const playersList = document.getElementById('player-list');
+            playersList.style.display = "none";
+            passwordsUl.innerHTML = "";  
+
+            players.forEach((player, i) => {
+                if (i !== index) { 
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>${player.name}</strong>: ${player.password}`;
+                    passwordsUl.appendChild(li);
+                }
+            }); 
+
+            passwordsUl.style.display = "grid"; 
+        }
+    </script>
+</body>
+</html>

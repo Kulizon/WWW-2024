@@ -1,0 +1,246 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f5;
+    color: #333;
+    text-align: center;
+    padding: 32px 8px;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.passwords li {
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    transition: box-shadow 0.3s ease;
+}
+
+.passwords li:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+#player-list button {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    font-family: inherit;
+}
+
+a:not(.game-link) {
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:not(.game-link):hover {
+    color: #45a049;
+}
+
+button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+button.hidden {
+    display: none;
+}
+
+button[type="button"] {
+    background-color: #008CBA;
+}
+
+button[type="button"]:hover {
+    background-color: #007BA7;
+}
+
+.passwords {
+    display: none;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.passwords ul {
+    padding-left: 20px;
+}
+
+.passwords li {
+    margin: 5px 0;
+}
+
+.input-group {
+    margin: 5px 0 0;
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
+}
+
+.input-group label {
+    margin-bottom: 5px; 
+    font-weight: bold; 
+    color: #333; 
+}
+
+input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+input[type="text"]::placeholder {
+    color: #999;
+    opacity: 1;
+}
+
+input[type="text"]:hover {
+    border-color: #bbb;
+}
+
+.player {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#players-container {
+    margin-bottom: 10px;
+}
+
+.player:not(:first-of-type) label {
+    display: none;
+}
+
+.passwords, #player-list {  
+    width: 600px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px; 
+}
+
+#player-list li {
+    display: flex;
+    justify-content: center;
+    font-size: 32px;
+}
+
+.passwords li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.passwords strong {    
+    font-size: 32px;
+}
+
+.passwords li {
+    font-size: 32px;
+}
+
+#games-history {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.game-item {
+    margin: 15px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.game-item > a > li {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.game-item:hover {
+    background-color: #e9ecef;
+}
+
+.player-name {
+    color: #007BFF; 
+    font-weight: bold;
+}
+
+.back-link {
+    display: inline-block;
+    margin: 5px 0 20px;
+}
+
+.pagination {
+    margin: 20px 0 0;
+}
+
+.error-message {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: rgb(235, 51, 51);
+    font-weight: bold;
+    margin: 5px 0 10px;
+}
