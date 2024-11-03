@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historia Gier</title>
     <link rel="stylesheet" href="/styles.css">
+    <style>
+        .password {
+            display: none; /* Initially hide passwords */
+        }
+    </style>
 </head>
 <body>
     <h1>Historia Gier</h1>
@@ -13,21 +18,25 @@
         <ul>
             <% games.forEach(game => { %>
                 <article class="game-item">
-                    <a href="/game/<%= game._id %>" class="game-link">
-                        <li>
-                            <span><strong>Gra:</strong> <%= game._id %></span>
-                            <div>
-                                <strong>Gracze:</strong> 
-                                <ul>
-                                    <% game.players.forEach(player => { %>
-                                        <li>
-                                            <span class="player-name"><%= player.name %></span>: <%= player.password %>
-                                        </li>
-                                    <% }) %>
-                                </ul>
-                            </div>
-                        </li>
-                    </a>
+                    <li>
+                        <span><strong>Gra:</strong> <%= game._id %></span>
+                        <div>
+                            <strong>Gracze:</strong> 
+                            <ul>
+                                <% game.players.forEach(player => { %>
+                                    <li>
+                                        <span class="player-name"><%= player.name %></span> 
+                                        <span class="password"><%= player.password %></span>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                        <div>
+                            <button class="reveal-passwords" type="button" onclick="togglePasswords(this)">Pokaż hasła</button>
+                            <button class="show-game" onclick="showGame('<%= game._id %>')">Pokaż grę</button>
+                        </div>
+                        
+                    </li>
                 </article>
             <% }) %>
         </ul>
@@ -41,5 +50,28 @@
             <a href="?page=<%= page + 1 %>">Następna</a>
         <% } %>
     </div>
+
+    <script>
+        function togglePasswords(button) {
+            const gameItem = button.closest('.game-item');
+            const passwords = gameItem.querySelectorAll('.password');
+            
+            passwords.forEach(password => {
+                password.style.display = password.style.display === 'inline' ? 'none' : 'inline';
+            });
+
+            // Change button text based on visibility
+            if (passwords[0].style.display === 'inline') {
+                button.textContent = 'Ukryj hasła';
+            } else {
+                button.textContent = 'Pokaż hasła';
+            }
+        }
+
+        function showGame(gameId) {
+            // Redirect to the game details page
+            window.location.href = `/game/${gameId}`;
+        }
+    </script>
 </body>
 </html>

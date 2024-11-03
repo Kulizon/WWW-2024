@@ -9,24 +9,48 @@
 <body>
     <form id="game-form" action="/new-game" method="POST" onsubmit="return validateForm()">
         <div id="players-container">
+            <!-- Three player inputs displayed by default -->
             <div class="player">
                 <div class="input-group">
-                    <label for="player-name-0">Player Name</label>
-                    <input type="text" id="player-name-0" name="players[0][name]" placeholder="Player Name">
+                    <label for="player-name-0">Imię gracza</label>
+                    <input type="text" id="player-name-0" name="players[0][name]" placeholder="Imię gracza">
                 </div>
                 <div class="input-group">
-                    <label for="player-password-0">Password</label>
-                    <input type="text" id="player-password-0" name="players[0][password]" placeholder="Password">
+                    <label for="player-password-0">Hasło</label>
+                    <input type="text" id="player-password-0" name="players[0][password]" placeholder="Hasło">
                 </div>
+                <button type="button" onclick="removePlayer(this)">Usuń gracza</button>
+            </div>
+            <div class="player">
+                <div class="input-group">
+                    <label for="player-name-1">Imię gracza</label>
+                    <input type="text" id="player-name-1" name="players[1][name]" placeholder="Imię gracza">
+                </div>
+                <div class="input-group">
+                    <label for="player-password-1">Hasło</label>
+                    <input type="text" id="player-password-1" name="players[1][password]" placeholder="Hasło">
+                </div>
+                <button type="button" onclick="removePlayer(this)">Usuń gracza</button>
+            </div>
+            <div class="player">
+                <div class="input-group">
+                    <label for="player-name-2">Imię gracza</label>
+                    <input type="text" id="player-name-2" name="players[2][name]" placeholder="Imię gracza">
+                </div>
+                <div class="input-group">
+                    <label for="player-password-2">Hasło</label>
+                    <input type="text" id="player-password-2" name="players[2][password]" placeholder="Hasło">
+                </div>
+                <button type="button" onclick="removePlayer(this)">Usuń gracza</button>
             </div>
         </div>
         <div id="error-message" class="error-message"></div>
-        <button type="button" onclick="addPlayer()">Add Player</button>
-        <button type="submit">Start Game</button>
+        <button type="button" onclick="addPlayer()">Dodaj gracza</button>
+        <button type="submit">Rozpocznij grę</button>
     </form>
 
     <script>
-        let playerCount = 1;
+        let playerCount = 3; // Start with 3 players by default
 
         function addPlayer() {
             const container = document.getElementById('players-container');
@@ -34,16 +58,36 @@
             playerDiv.classList.add('player');
             playerDiv.innerHTML = `
                 <div class="input-group">
-                    <label for="player-name-${playerCount}">Player Name</label>
-                    <input type="text" id="player-name-${playerCount}" name="players[${playerCount}][name]" placeholder="Player Name">
+                    <label for="player-name-${playerCount}">Imię gracza</label>
+                    <input type="text" id="player-name-${playerCount}" name="players[${playerCount}][name]" placeholder="Imię gracza">
                 </div>
                 <div class="input-group">
-                    <label for="player-password-${playerCount}">Password</label>
-                    <input type="text" id="player-password-${playerCount}" name="players[${playerCount}][password]" placeholder="Password">
+                    <label for="player-password-${playerCount}">Hasło</label>
+                    <input type="text" id="player-password-${playerCount}" name="players[${playerCount}][password]" placeholder="Hasło">
                 </div>
+                <button type="button" onclick="removePlayer(this)">Usuń gracza</button>
             `;
             container.appendChild(playerDiv);
             playerCount++;
+
+            // Clear error message if adding a player makes the player count >= 3
+            if (document.querySelectorAll('.player').length >= 3) {
+                document.getElementById('error-message').innerHTML = '';
+            }
+        }
+
+        function removePlayer(button) {
+            const container = document.getElementById('players-container');
+            const playerDiv = button.parentElement;
+            container.removeChild(playerDiv);
+            playerCount--;
+
+            // Display error if there are fewer than 3 players
+            if (document.querySelectorAll('.player').length < 3) {
+                document.getElementById('error-message').innerHTML = 'Musi być przynajmniej 3 graczy.';
+            } else {
+                document.getElementById('error-message').innerHTML = '';
+            }
         }
 
         function validateForm() {
@@ -52,21 +96,31 @@
             const errorMessageDiv = document.getElementById('error-message');
             errorMessageDiv.innerHTML = ''; 
 
+            // Flags to track each error type
+            let playerCountError = false;
+            let nameLengthError = false;
+            let passwordLengthError = false;
+
+            // Check minimum number of players
             if (playerDivs.length < 3) {
-                errorMessageDiv.innerHTML += 'Please add at least 3 players. <br>';
+                errorMessageDiv.innerHTML += 'Dodaj przynajmniej 3 graczy. <br>';
+                playerCountError = true;
                 isValid = false;
             }
 
+            // Check individual player name and password lengths
             for (let i = 0; i < playerDivs.length; i++) {
                 const nameInput = playerDivs[i].querySelector(`input[name="players[${i}][name]"]`);
                 const passwordInput = playerDivs[i].querySelector(`input[name="players[${i}][password]"]`);
 
-                if (nameInput.value.trim().length < 3) {
-                    errorMessageDiv.innerHTML += 'Player names must be at least 3 characters long. <br>';
+                if (nameInput.value.trim().length < 3 && !nameLengthError) {
+                    errorMessageDiv.innerHTML += 'Imiona graczy muszą mieć co najmniej 3 znaki. <br>';
+                    nameLengthError = true;
                     isValid = false;
                 }
-                if (passwordInput.value.trim().length < 3) {
-                    errorMessageDiv.innerHTML += 'Passwords must be at least 3 characters long. <br>';
+                if (passwordInput.value.trim().length < 3 && !passwordLengthError) {
+                    errorMessageDiv.innerHTML += 'Hasła muszą mieć co najmniej 3 znaki. <br>';
+                    passwordLengthError = true;
                     isValid = false;
                 }
             }

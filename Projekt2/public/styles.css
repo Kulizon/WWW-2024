@@ -105,12 +105,20 @@ button[type="button"]:hover {
     color: #555;
 }
 
+.highlighted {
+    color: #4CAF50;
+}
+
 .passwords ul {
     padding-left: 20px;
 }
 
 .passwords li {
     margin: 5px 0;
+}
+
+input, button {
+    border: 1px solid;
 }
 
 .input-group {
@@ -152,6 +160,7 @@ input[type="text"]:hover {
 
 .player {
     display: flex;
+    align-items: flex-end;
     gap: 10px;
     margin-bottom: 10px;
 }
@@ -165,9 +174,10 @@ input[type="text"]:hover {
 }
 
 .passwords, #player-list {  
-    width: 600px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px; 
 }
 
@@ -211,7 +221,7 @@ input[type="text"]:hover {
     transition: background-color 0.3s ease;
 }
 
-.game-item > a > li {
+.game-item > li {
     width: 100%;
     display: flex;
     flex-direction: column;
