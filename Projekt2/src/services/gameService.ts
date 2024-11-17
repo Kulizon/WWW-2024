@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Game from '../models/Game';
 
 class GameService {
@@ -12,10 +13,10 @@ class GameService {
 
     for (const player of players) {
       if (!player.name || player.name.trim().length < 3) {
-        throw new Error('Wszystkie imiona graczy muszą mieć co najmniej 3 znaki.');
+        throw new Error('Imiona graczy muszą mieć co najmniej 3 znaki.');
       }
       if (!player.password || player.password.trim().length < 3) {
-        throw new Error('Wszystkie hasła muszą mieć co najmniej 3 znaki.');
+        throw new Error('Hasła muszą mieć co najmniej 3 znaki.');
       }
     }
 
@@ -25,6 +26,7 @@ class GameService {
         password: player.password,
       })),
       createdAt: new Date(),
+      questions: [],
     });
 
     try {
@@ -39,6 +41,7 @@ class GameService {
     try {
       const totalGames = await Game.countDocuments();
       const games = await Game.find()
+        .sort({ createdAt: -1 })
         .skip((page - 1) * limit)
         .limit(limit);
 
@@ -52,9 +55,9 @@ class GameService {
 
   async getGameById(gameId: string) {
     try {
-      const game = await Game.findById(gameId);
+      const game = await Game.findById(gameId).populate('players');
       if (!game) {
-        throw new Error('Gra nie została znaleziona');
+        throw new Error('Gra nie znaleziona');
       }
       return game;
     } catch (error) {
@@ -64,3 +67,5 @@ class GameService {
 }
 
 export default new GameService();
+
+  

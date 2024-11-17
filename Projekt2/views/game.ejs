@@ -8,24 +8,50 @@
 </head>
 <body>
     <h1>Gra: <span class="highlighted"><%= game._id %></span></h1>
-    <h2>Uczestnicy:</h2>
-    <ul id="player-list">
-        <% game.players.forEach((player, index) => { %>
-            <li>
-                <button type="button" onclick="togglePasswords(<%= index %>, <%= JSON.stringify(game.players) %>)">
-                    <strong><%= player.name %></strong>
-                </button>
-            </li>
-        <% }) %>
-    </ul>
-    <ul class="passwords" id="passwords-ul"></ul>
-
+    <a href="/" class="back-link">Powrót do strony głównej</a>
+    <section>
+        <h2>Uczestnicy:</h2>
+        <ul id="player-list">
+            <% game.players.forEach((player, index) => { %>
+                <li>
+                    <button type="button" onclick="togglePasswords(<%= index %>, <%= JSON.stringify(game.players) %>, <%= JSON.stringify(game.questions) %>)">
+                        <strong><%= player.name %></strong>
+                    </button>
+                </li>
+            <% }) %>
+        </ul>
+        <ul class="passwords" id="passwords-ul"></ul>
+    
+        <div id="question-form-container" style="display:none;">
+            <h3>Dodaj pytanie dla gracza</h3>
+            <form id="question-form" onsubmit="addQuestion(<%= JSON.stringify(game.id) %>, event)">
+                <input type="hidden" id="selected-player-id" value="">
+                <label for="question">Pytanie:</label>
+                <input type="text" id="question" required>
+                <label for="answer">Odpowiedź:</label>
+                <input type="text" id="answer" required>
+                <button type="submit">Dodaj pytanie</button>
+            </form>
+        </div>
+    
+        <div id="questions-list-container" style="display:none;">
+            <h3>Lista pytań dla gracza</h3>
+            <ul id="questions-list"></ul>
+        </div>
+    </section>
+    
     <script>
-        function togglePasswords(index, players) {
+        let playerId;
+        let questions;
+
+        function togglePasswords(index, players, allQuestions) {
             const passwordsUl = document.getElementById('passwords-ul');
             const playersList = document.getElementById('player-list');
             playersList.style.display = "none";
             passwordsUl.innerHTML = "";  
+
+            playerId = players[index]._id;
+            questions = allQuestions.filter(question => question.playerId === playerId);
 
             players.forEach((player, i) => {
                 if (i !== index) { 
@@ -33,9 +59,81 @@
                     li.innerHTML = `<strong>${player.name}</strong>: ${player.password}`;
                     passwordsUl.appendChild(li);
                 }
-            }); 
+            });
 
-            passwordsUl.style.display = "flex"; 
+            const questionsListContainer = document.getElementById('questions-list-container');
+            const questionsList = document.getElementById('questions-list');
+            questionsList.innerHTML = '';  
+
+            if (questions.length === 0) {
+                const li = document.createElement('li');
+                li.textContent = "Brak pytań.";
+                questionsList.appendChild(li);
+            } else {
+                questions.forEach((question) => {
+                    const li = document.createElement('li');
+                    li.setAttribute('data-id', question._id);
+                    li.innerHTML = `
+                        <strong>${question.question}</strong> - <em>Odpowiedź: ${question.answer}</em>
+                        <button onclick="removeQuestion(<%= JSON.stringify(game.id) %>, '${question._id}')">Usuń</button>`;
+                    questionsList.appendChild(li);
+                });
+            }
+
+            document.getElementById('question-form-container').style.display = "block";
+            questionsListContainer.style.display = "block"; 
+        }
+
+        function addQuestion(gameId, event) {
+            event.preventDefault();
+
+            console.log(gameId, event)
+
+            const questionInput = document.getElementById('question');
+            const answerInput = document.getElementById('answer');
+
+            const newQuestion = {
+                playerId: playerId,
+                question: questionInput.value,
+                answer: answerInput.value,
+            };
+
+            fetch(`/game/${gameId}/add-question`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newQuestion),
+            })
+            .then(data => data.json())
+            .then(questionId => {
+                    questions.push(newQuestion);
+                    const questionsList = document.getElementById('questions-list');
+                    const li = document.createElement('li');
+                    li.setAttribute('data-id', questionId);
+                    li.innerHTML = `
+                        <strong>${newQuestion.question}</strong> - <em>Odpowiedź: ${newQuestion.answer}</em>
+                        <button onclick="removeQuestion(<%= JSON.stringify(game.id) %>, '${questionId}')">Usuń</button>`;
+                    questionsList.appendChild(li);
+                    questionInput.value = '';
+                    answerInput.value = '';
+                }
+            )
+        }
+
+        function removeQuestion(gameId, questionId) {
+            fetch(`/game/${gameId}/remove-question/${questionId}`, {
+                method: 'DELETE',
+            })
+            .then(data => {
+                    questions = questions.filter(question => question._id !== questionId);
+                    const questionListItem = document.querySelector(`#questions-list li[data-id="${questionId}"]`);
+                    if (questionListItem) {
+                        questionListItem.remove();
+                        console.log('usunięto pytanie');
+                    }
+                
+            })
         }
     </script>
 </body>

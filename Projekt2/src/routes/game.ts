@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { getGameById } from '../controllers/gameController';
+import { getGameById, addQuestion, removeQuestion } from '../controllers/gameController';
 
 const router = Router();
 
-//@ts-ignore
 router.get('/:id', getGameById);
+router.post('/:id/add-question', addQuestion); 
+router.delete('/:id/remove-question/:questionId', removeQuestion); 
 
 export default router;
