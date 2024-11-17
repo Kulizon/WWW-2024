@@ -87,8 +87,6 @@
         function addQuestion(gameId, event) {
             event.preventDefault();
 
-            console.log(gameId, event)
-
             const questionInput = document.getElementById('question');
             const answerInput = document.getElementById('answer');
 
@@ -107,9 +105,14 @@
             })
             .then(data => data.json())
             .then(questionId => {
-                    questions.push(newQuestion);
+   
+                    questions.push({...newQuestion, _id: questionId});
                     const questionsList = document.getElementById('questions-list');
                     const li = document.createElement('li');
+                    if (questions.length === 1) {
+                        questionsList.innerHTML = '';
+                    }
+
                     li.setAttribute('data-id', questionId);
                     li.innerHTML = `
                         <strong>${newQuestion.question}</strong> - <em>Odpowiedź: ${newQuestion.answer}</em>
@@ -127,6 +130,15 @@
             })
             .then(data => {
                     questions = questions.filter(question => question._id !== questionId);
+
+                    if (questions.length === 0) {
+                        const questionsList = document.getElementById('questions-list');
+                        const li = document.createElement('li');
+                        li.textContent = "Brak pytań.";
+                        questionsList.innerHTML = '';
+                        questionsList.appendChild(li);
+                    }
+
                     const questionListItem = document.querySelector(`#questions-list li[data-id="${questionId}"]`);
                     if (questionListItem) {
                         questionListItem.remove();
