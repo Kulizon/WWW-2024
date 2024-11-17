@@ -1,18 +1,7 @@
 import { Router } from 'express';
-import Game from '../models/Game.js';
+import { getGameById, addQuestion, removeQuestion } from '../controllers/gameController';
 const router = Router();
-// @ts-ignore
-router.get('/:id', async (req, res) => {
-    const gameId = req.params.id;
-    try {
-        const game = await Game.findById(gameId);
-        if (!game) {
-            return res.status(404).send('Game not found');
-        }
-        res.render('game', { game });
-    }
-    catch (error) {
-        res.status(500).send('Server error');
-    }
-});
+router.get('/:id', getGameById);
+router.post('/:id/add-question', addQuestion);
+router.delete('/:id/remove-question/:questionId', removeQuestion);
 export default router;
