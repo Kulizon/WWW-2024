@@ -9,7 +9,6 @@
 <body>
     <form id="game-form" action="/new-game" method="POST" onsubmit="return validateForm()">
         <div id="players-container">
-            <!-- Three player inputs displayed by default -->
             <div class="player">
                 <div class="input-group">
                     <label for="player-name-0">Imię gracza</label>
@@ -50,7 +49,7 @@
     </form>
 
     <script>
-        let playerCount = 3; // Start with 3 players by default
+        let playerCount = 3;
 
         function addPlayer() {
             const container = document.getElementById('players-container');
@@ -70,7 +69,6 @@
             container.appendChild(playerDiv);
             playerCount++;
 
-            // Clear error message if adding a player makes the player count >= 3
             if (document.querySelectorAll('.player').length >= 3) {
                 document.getElementById('error-message').innerHTML = '';
             }
@@ -82,7 +80,6 @@
             container.removeChild(playerDiv);
             playerCount--;
 
-            // Display error if there are fewer than 3 players
             if (document.querySelectorAll('.player').length < 3) {
                 document.getElementById('error-message').innerHTML = 'Musi być przynajmniej 3 graczy.';
             } else {
@@ -94,21 +91,18 @@
             const playerDivs = document.querySelectorAll('.player');
             let isValid = true;
             const errorMessageDiv = document.getElementById('error-message');
-            errorMessageDiv.innerHTML = ''; 
+            errorMessageDiv.innerHTML = '';
 
-            // Flags to track each error type
             let playerCountError = false;
             let nameLengthError = false;
             let passwordLengthError = false;
 
-            // Check minimum number of players
             if (playerDivs.length < 3) {
                 errorMessageDiv.innerHTML += 'Dodaj przynajmniej 3 graczy. <br>';
                 playerCountError = true;
                 isValid = false;
             }
 
-            // Check individual player name and password lengths
             for (let i = 0; i < playerDivs.length; i++) {
                 const nameInput = playerDivs[i].querySelector(`input[name="players[${i}][name]"]`);
                 const passwordInput = playerDivs[i].querySelector(`input[name="players[${i}][password]"]`);
@@ -127,6 +121,20 @@
 
             return isValid;
         }
+
+        window.addEventListener('load', function() {
+            const errorMessageDiv = document.getElementById('error-message');
+            let serverError;
+            try {
+                serverError = '<%= error || "" %>'.slice(7);
+            } catch (e) {
+                serverError = "";
+            }
+
+            if (serverError) {
+                errorMessageDiv.innerHTML = serverError;
+            }
+        });
     </script>
 </body>
 </html>

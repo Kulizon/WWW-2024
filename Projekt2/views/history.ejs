@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/styles.css">
     <style>
         .password {
-            display: none; /* Initially hide passwords */
+            display: none; 
         }
     </style>
 </head>
@@ -60,7 +60,6 @@
                 password.style.display = password.style.display === 'inline' ? 'none' : 'inline';
             });
 
-            // Change button text based on visibility
             if (passwords[0].style.display === 'inline') {
                 button.textContent = 'Ukryj hasła';
             } else {
@@ -69,7 +68,6 @@
         }
 
         function showGame(gameId) {
-            // Redirect to the game details page
             window.location.href = `/game/${gameId}`;
         }
     </script>
