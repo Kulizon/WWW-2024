@@ -58,7 +58,7 @@
             passwordsUl.innerHTML = "";  
 
             playerId = players[index]._id;
-            questions = allQuestions.filter(question => question.playerId === playerId);
+            questions = allQuestions ? allQuestions.filter(question => question.playerId === playerId) : [];
 
             players.forEach((player, i) => {
                 if (i !== index) { 
