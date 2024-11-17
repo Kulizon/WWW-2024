@@ -263,3 +263,27 @@ input[type="text"]:hover {
 #question-form-container h3, #questions-list-container h3 {
     margin: 10px 0;
 }
+
+#question-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+#question-form-container form > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#questions-list li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button.xs {
+    padding: 5px 10px;
+    font-size: 0.8em;
+}

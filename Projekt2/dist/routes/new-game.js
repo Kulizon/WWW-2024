@@ -29,7 +29,6 @@ router.post('/', async (req, res) => {
         res.redirect(`/game/${newGame._id}`);
     }
     catch (error) {
-        console.error('Error saving new game:', error);
         res.status(500).render('new-game', { error: 'Server error while saving the game. Please try again later.' });
     }
 });

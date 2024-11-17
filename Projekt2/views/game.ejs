@@ -25,11 +25,18 @@
         <div id="question-form-container" style="display:none;">
             <h3>Dodaj pytanie dla gracza</h3>
             <form id="question-form" onsubmit="addQuestion(<%= JSON.stringify(game.id) %>, event)">
-                <input type="hidden" id="selected-player-id" value="">
-                <label for="question">Pytanie:</label>
-                <input type="text" id="question" required>
-                <label for="answer">Odpowiedź:</label>
-                <input type="text" id="answer" required>
+                <div>
+                    <input type="hidden" id="selected-player-id" value="">
+                    <div class="input-group">
+                        <label for="question">Pytanie:</label>
+                        <input type="text" id="question" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="answer">Odpowiedź:</label>
+                        <input type="text" id="answer" required>
+                    </div>
+                </div>
+
                 <button type="submit">Dodaj pytanie</button>
             </form>
         </div>
@@ -75,7 +82,7 @@
                     li.setAttribute('data-id', question._id);
                     li.innerHTML = `
                         <strong>${question.question}</strong> - <em>Odpowiedź: ${question.answer}</em>
-                        <button onclick="removeQuestion(<%= JSON.stringify(game.id) %>, '${question._id}')">Usuń</button>`;
+                        <button class="xs" onclick="removeQuestion(<%= JSON.stringify(game.id) %>, '${question._id}')">Usuń</button>`;
                     questionsList.appendChild(li);
                 });
             }
@@ -116,7 +123,7 @@
                     li.setAttribute('data-id', questionId);
                     li.innerHTML = `
                         <strong>${newQuestion.question}</strong> - <em>Odpowiedź: ${newQuestion.answer}</em>
-                        <button onclick="removeQuestion(<%= JSON.stringify(game.id) %>, '${questionId}')">Usuń</button>`;
+                        <button class="xs" onclick="removeQuestion(<%= JSON.stringify(game.id) %>, '${questionId}')">Usuń</button>`;
                     questionsList.appendChild(li);
                     questionInput.value = '';
                     answerInput.value = '';
@@ -142,7 +149,6 @@
                     const questionListItem = document.querySelector(`#questions-list li[data-id="${questionId}"]`);
                     if (questionListItem) {
                         questionListItem.remove();
-                        console.log('usunięto pytanie');
                     }
                 
             })

@@ -54,9 +54,6 @@ export const addQuestion = async (req: Request, res: Response) => {
 export const removeQuestion = async (req: Request, res: Response) => {
   const { id: gameId, questionId } = req.params;
 
-  console.log({ gameId, questionId});
-
-
   try {
     await QuestionService.removeQuestion(gameId, questionId);
     res.status(302).send();
