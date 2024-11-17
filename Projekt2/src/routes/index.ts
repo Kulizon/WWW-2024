@@ -1,9 +1,9 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 
 const router = Router();
 
-router.get('/', (req: Request, res: Response) => {
-    res.render('index');
+router.get('/', (req, res) => {
+  res.render('index');
 });
 
 export default router;
