@@ -1,7 +1,0 @@
-strona do czolka
-rozlosowywuje nazwy dla uzytkownikow
-ty sobie klikasz swoje imie i dostajesz hasla innych
-
-jedna osoby tworzy lobby i dodaje hasla, a pozniej rozsyla linki
-i rozgrywki sie zapisuja, mozna zapisywac pytania w bazie danych
-i historie rozgrywek bedzie zapisywac

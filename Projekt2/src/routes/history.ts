@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import Game from '../models/Game.js';
+import Game from '../../models/Game.js';
 
 const router = Router();
 
@@ -17,7 +17,7 @@ router.get('/', async (req: Request, res: Response) => {
 
         res.render('history', { games, page, totalPages });
     } catch (error) {
-        res.status(500).send('Błąd serwera');
+        res.status(500).send('Server error');
     }
 });
 

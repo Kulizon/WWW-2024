@@ -1,10 +1,10 @@
 import { Router, Request, Response } from 'express';
-import Game from '../models/Game.js';
+import Game from '../../models/Game.js';
 
 const router = Router();
 
-// @ts-ignore
-router.get('/:id', async (req: Request, res: Response) => {
+//@ts-ignore
+router.get('/:id', async (req: Request<{ id: string }>, res: Response) => {
     const gameId = req.params.id;
 
     try {
@@ -18,4 +18,4 @@ router.get('/:id', async (req: Request, res: Response) => {
     }
 });
 
-export default router
+export default router;
