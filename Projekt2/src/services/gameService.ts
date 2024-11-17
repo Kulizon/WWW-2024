@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Game from '../models/Game';
+import Game from '../models/Game.js';
 
 class GameService {
   async createGame(players: { name: string; password: string }[]) {

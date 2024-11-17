@@ -1,4 +1,4 @@
-import Game from '../models/Game';
+import Game from '../models/Game.js';
 class QuestionService {
     async addQuestion(gameId, playerId, question, questionId, answer) {
         try {

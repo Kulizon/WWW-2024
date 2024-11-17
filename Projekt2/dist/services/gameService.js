@@ -1,4 +1,4 @@
-import Game from '../models/Game';
+import Game from '../models/Game.js';
 class GameService {
     async createGame(players) {
         if (!Array.isArray(players) || players.length < 3) {

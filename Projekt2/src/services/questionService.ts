@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Game from '../models/Game';
+import Game from '../models/Game.js';
 
 class QuestionService {
 async addQuestion(gameId: string, playerId: string, question: string, questionId: mongoose.Types.ObjectId, answer: string) {

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getGameById, addQuestion, removeQuestion } from '../controllers/gameController';
+import { getGameById, addQuestion, removeQuestion } from '../controllers/gameController.js';
 const router = Router();
 router.get('/:id', getGameById);
 router.post('/:id/add-question', addQuestion);

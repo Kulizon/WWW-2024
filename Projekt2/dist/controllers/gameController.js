@@ -1,5 +1,5 @@
-import GameService from '../services/gameService';
-import QuestionService from '../services/questionService';
+import GameService from '../services/gameService.js';
+import QuestionService from '../services/questionService.js';
 import mongoose from 'mongoose';
 export const getGameById = async (req, res) => {
     const gameId = req.params.id;
