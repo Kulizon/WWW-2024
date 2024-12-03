@@ -1,76 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Monkeys - Home</title>
+    <title>Małpy - Strona główna</title>
+    <link href="quiz.js" rel="script">
 </head>
 <body>
     <header>
-        <h1>All About Monkeys</h1>
+        <h1>Wszystko o Małpach</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="species.html">Species</a></li>
-                <li><a href="habitat.html">Habitat</a></li>
-                <li><a href="diet.html">Diet</a></li>
-                <li><a href="behavior.html">Behavior</a></li>
-                <li><a href="conservation.html">Conservation</a></li>
+                <li><a href="index.html">Strona główna</a></li>
+                <li><a href="species.html">Gatunki</a></li>
+                <li><a href="habitat.html">Siedlisko</a></li>
+                <li><a href="diet.html">Dieta</a></li>
+                <li><a href="behavior.html">Zachowanie</a></li>
+                <li><a href="conservation.html">Ochrona</a></li>
             </ul>
         </nav>
     </header>
     
     <main>
-        <h2>Welcome to the Monkey World!</h2>
-        <p>Monkeys are fascinating primates found in various parts of the world. They are known for their intelligence, social behaviors, and playful nature. This website aims to provide you with in-depth information about monkeys, their habitats, diets, behaviors, and conservation efforts.</p>
+        <h2>Witamy w Świecie Małp!</h2>
+        <p>Małpy to fascynujące ssaki naczelne występujące w różnych częściach świata. Znane są ze swojej inteligencji, zachowań społecznych i zabawnej natury. Ta strona internetowa ma na celu dostarczenie szczegółowych informacji o małpach, ich siedliskach, dietach, zachowaniach i wysiłkach na rzecz ich ochrony.</p>
 
         <section>
-            <h3>Why Monkeys Are Important</h3>
-            <p>Monkeys play a crucial role in their ecosystems as seed dispersers and contributors to biodiversity. They help maintain healthy forest environments, which in turn supports other wildlife.</p>
+            <h3>Dlaczego Małpy Są Ważne</h3>
+            <p>Małpy odgrywają kluczową rolę w swoich ekosystemach jako rozsiewacze nasion i twórcy różnorodności biologicznej. Pomagają w utrzymaniu zdrowych środowisk leśnych, co z kolei wspiera inne dzikie zwierzęta.</p>
         </section>
 
         <section>
-            <h3>Fun Facts About Monkeys</h3>
+            <h3>Ciekawostki o Małpach</h3>
             <ul>
-                <li>Monkeys are highly social animals, often living in large groups called troops.</li>
-                <li>Some species of monkeys can use tools, such as stones to crack open nuts.</li>
-                <li>Howler monkeys are known for their loud vocalizations, which can be heard up to three miles away.</li>
-                <li>Capuchin monkeys are considered one of the most intelligent monkey species and are often used in research.</li>
-                <li>Some monkeys, like the Japanese macaque, are known to bathe in hot springs during winter.</li>
+                <li>Małpy są bardzo towarzyskie i często żyją w dużych grupach zwanych stadami.</li>
+                <li>Niektóre gatunki małp potrafią używać narzędzi, na przykład kamieni do rozłupywania orzechów.</li>
+                <li>Wyjce są znane ze swoich głośnych wokalizacji, które można usłyszeć z odległości nawet trzech mil.</li>
+                <li>Kapucynki są uważane za jedne z najbardziej inteligentnych gatunków małp i często są wykorzystywane w badaniach.</li>
+                <li>Niektóre małpy, takie jak makaki japońskie, znane są z kąpieli w gorących źródłach w czasie zimy.</li>
             </ul>
         </section>
 
         <section>
-            <h3>Images of Monkeys</h3>
-            <img src="public/proboscis.jfif" alt="Proboscis Monkey">
-            <img src="public/howler.jpg" alt="Howler Monkey">
-            <img src="public/macaque.jpg" alt="Macaque">
-            <p>Images help illustrate the diverse species and playful nature of monkeys.</p>
+            <h3>Quiz o Małpach</h3>
+            <p>Sprawdź swoją wiedzę o małpach! Kliknij poniższy przycisk, aby rozpocząć quiz.</p>
+            <button class="main-button" onclick="startQuiz()">Rozpocznij Quiz</button>
         </section>
 
         <section>
-            <h3>Explore More</h3>
-            <p>Learn more about different aspects of monkey life:</p>
+            <h3>Zdjęcia Małp</h3>
+            <img src="public/proboscis.jfif" alt="Małpa Długonosowa">
+            <img src="public/howler.jpg" alt="Wyjec">
+            <img src="public/macaque.jpg" alt="Makak">
+            <p>Zdjęcia pomagają zilustrować różnorodne gatunki i zabawną naturę małp.</p>
+        </section>
+
+        <section>
+            <h3>Odkryj Więcej</h3>
+            <p>Dowiedz się więcej o różnych aspektach życia małp:</p>
             <ul>
-                <li><a href="species.html">Explore different monkey species</a></li>
-                <li><a href="habitat.html">Discover their natural habitats</a></li>
-                <li><a href="diet.html">Learn about their diet</a></li>
-                <li><a href="behavior.html">Understand their behaviors</a></li>
-                <li><a href="conservation.html">Find out how to help conserve monkeys</a></li>
+                <li><a href="species.html">Odkryj różne gatunki małp</a></li>
+                <li><a href="habitat.html">Poznaj ich naturalne siedliska</a></li>
+                <li><a href="diet.html">Dowiedz się o ich diecie</a></li>
+                <li><a href="behavior.html">Zrozum ich zachowania</a></li>
+                <li><a href="conservation.html">Dowiedz się, jak pomóc chronić małpy</a></li>
             </ul>
         </section>
     </main>
         
     <aside>
-        <h3>Did You Know?</h3>
-        <p>Monkeys are one of the few animals that can recognize themselves in a mirror, a sign of self-awareness. Not all species pass this test, but some, like capuchins, have shown curiosity about their reflections!</p>
-        <p>Monkeys have different calls and gestures for communicating danger, food, or affection, making their social interactions complex and fascinating.</p>
-        <p>Some monkey species are omnivores, meaning they eat both plants and small animals like insects, making them adaptable to various environments.</p>
+        <h3>Czy Wiesz, Że?</h3>
+        <p>Małpy są jednymi z niewielu zwierząt, które potrafią rozpoznać siebie w lustrze, co jest oznaką samoświadomości. Nie wszystkie gatunki zdają ten test, ale niektóre, jak kapucynki, wykazują ciekawość wobec swoich odbić!</p>
+        <p>Małpy mają różne odgłosy i gesty do komunikowania zagrożenia, jedzenia lub uczuć, co czyni ich interakcje społeczne złożonymi i fascynującymi.</p>
+        <p>Niektóre gatunki małp są wszystkożerne, co oznacza, że jedzą zarówno rośliny, jak i małe zwierzęta, takie jak owady, co czyni je zdolnymi do przystosowania się do różnych środowisk.</p>
     </aside>
 
     <footer>
-        <p>&copy; 2024 Monkey Enthusiasts</p>
+        <p>&copy; 2024 Miłośnicy Małp</p>
     </footer>
 </body>
 </html>
