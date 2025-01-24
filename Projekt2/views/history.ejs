@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historia Gier</title>
     <link rel="stylesheet" href="/styles.css">
+    <script src="/history.js" defer></script> 
     <style>
         .password {
             display: none; 
@@ -21,11 +22,11 @@
                     <li>
                         <span><strong>Gra:</strong> <%= game._id %></span>
                         <div>
-                            <strong>Gracze:</strong> 
+                            <strong>Gracze:</strong>
                             <ul>
                                 <% game.players.forEach(player => { %>
                                     <li>
-                                        <span class="player-name"><%= player.name %></span> 
+                                        <span class="player-name"><%= player.name %></span>
                                         <span class="password"><%= player.password %></span>
                                     </li>
                                 <% }) %>
@@ -35,7 +36,6 @@
                             <button class="reveal-passwords" type="button" onclick="togglePasswords(this)">Pokaż hasła</button>
                             <button class="show-game" onclick="showGame('<%= game._id %>')">Pokaż grę</button>
                         </div>
-                        
                     </li>
                 </article>
             <% }) %>
@@ -50,26 +50,5 @@
             <a href="?page=<%= page + 1 %>">Następna</a>
         <% } %>
     </div>
-
-    <script>
-        function togglePasswords(button) {
-            const gameItem = button.closest('.game-item');
-            const passwords = gameItem.querySelectorAll('.password');
-            
-            passwords.forEach(password => {
-                password.style.display = password.style.display === 'inline' ? 'none' : 'inline';
-            });
-
-            if (passwords[0].style.display === 'inline') {
-                button.textContent = 'Ukryj hasła';
-            } else {
-                button.textContent = 'Pokaż hasła';
-            }
-        }
-
-        function showGame(gameId) {
-            window.location.href = `/game/${gameId}`;
-        }
-    </script>
 </body>
 </html>
