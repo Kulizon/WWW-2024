@@ -37,7 +37,7 @@ class GameService {
     }
   }
 
-  async getAllGames(page: number = 1, limit: number = 5) {
+  async getAllGames(page: number = 1, limit: number = 3) {
     try {
       const totalGames = await Game.countDocuments();
       const games = await Game.find()

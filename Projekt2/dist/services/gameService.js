@@ -31,7 +31,7 @@ class GameService {
             throw new Error('Błąd podczas zapisywania nowej gry: ' + error);
         }
     }
-    async getAllGames(page = 1, limit = 5) {
+    async getAllGames(page = 1, limit = 3) {
         try {
             const totalGames = await Game.countDocuments();
             const games = await Game.find()
